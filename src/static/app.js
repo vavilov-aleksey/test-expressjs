@@ -24,6 +24,13 @@ const App = {
       const newArticle = await res.json();
       this.articles.push(newArticle);
     },
+
+    async deleteArticle(id) {
+      await fetch(`/api/server/${id}`, {
+        method: "DELETE",
+      });
+      this.articles = this.articles.filter((item) => item.id.toString() !== id.toString());
+    },
   },
   async mounted() {
     const res = await fetch("/api/server");

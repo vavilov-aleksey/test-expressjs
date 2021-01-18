@@ -22,8 +22,19 @@ app.get("/", (req, res) => {
   res.render("index", { title: "Home", active: "home" });
 });
 
-app.get("/article", (req, res) => {
-  res.render("article", { title: "Article", active: "article" });
+app.get("/articles", (req, res) => {
+  res.render("articles", { title: "Articles", active: "article" });
+});
+
+app.get("/article/:id", (req, res) => {
+  console.log(req.params);
+  const { id } = req.params;
+  res.render("article", { title: `Article id: ${id}`, active: "article", articleId: id });
+});
+
+app.get("/*", (req, res) => {
+  console.log("404 page?");
+  res.render("notfound", { title: "404 page" });
 });
 
 app.listen(PORT, () => {

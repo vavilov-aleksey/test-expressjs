@@ -1,4 +1,4 @@
-const mockDataList = [
+let mockDataList = [
   { id: 1, title: "Article 1" },
   { id: 2, title: "Article 2" },
   { id: 3, title: "Article 3" },
@@ -16,5 +16,10 @@ export const createArticle = (req, res) => {
   };
   mockDataList.push(newData);
   res.status(201).json(newData);
-  console.log(mockDataList);
+};
+
+export const deleteArticle = (req, res) => {
+  const { articleId } = req.params;
+  mockDataList = mockDataList.filter((item) => item.id.toString() !== articleId.toString());
+  res.json({ message: `Remove article id: ${articleId}` });
 };
