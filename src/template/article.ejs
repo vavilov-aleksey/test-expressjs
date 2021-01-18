@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="ru">
+<%- include("./common/head"); %>
+<body>
+    <div class="uk-container">
+        <%- include("./common/navbar"); %>
+        <h1>Page Article Ejs</h1>
+        <div id="app">
+
+            <form class="uk-form-stacked" @submit.prevent="createArticleForm">
+                <div class="uk-margin">
+                    <label class="uk-form-label" for="form-stacked-text">Article</label>
+                    <div class="uk-form-controls">
+                        <input class="uk-input" v-model="title" type="text" placeholder="Enter article title...">
+                    </div>
+                </div>
+            </form>
+
+            <div v-if="articles.length === 0">Loading...</div>
+            <ul class="uk-list uk-list-striped" v-else>
+                <li v-for="article in articles">{{ article.title }}</li>
+            </ul>
+        </div>
+    </div>
+    <script src="https://unpkg.com/vue@next"></script>
+    <script src="/app.js"></script>
+</body>
+</html>
