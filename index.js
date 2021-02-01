@@ -8,7 +8,7 @@ const __dirname = path.resolve();
 const PORT = 8080;
 const app = express();
 app.set("view engine", "ejs");
-app.set("views", path.resolve(__dirname, "src/template"));
+app.set("views", path.resolve(__dirname, "src/views"));
 
 app.use(express.static(path.resolve(__dirname, "src/static")));
 app.use(express.json());
@@ -29,6 +29,11 @@ app.get("/articles", (req, res) => {
 app.get("/article/:id", (req, res) => {
   const { id } = req.params;
   res.render("article", { title: `Article id: ${id}`, active: "article", articleId: id });
+});
+
+app.use((err, req, res, next) => {
+  // error page
+  res.status(500).render("5xx");
 });
 
 app.use((req, res) => {
