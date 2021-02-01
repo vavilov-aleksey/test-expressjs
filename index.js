@@ -27,14 +27,13 @@ app.get("/articles", (req, res) => {
 });
 
 app.get("/article/:id", (req, res) => {
-  console.log(req.params);
   const { id } = req.params;
   res.render("article", { title: `Article id: ${id}`, active: "article", articleId: id });
 });
 
-app.get("/*", (req, res) => {
-  console.log("404 page?");
-  res.render("notfound", { title: "404 page" });
+app.use((req, res) => {
+  console.log("404 page!");
+  res.status(404).render("404", { title: "404 page", url: req.originalUrl });
 });
 
 app.listen(PORT, () => {
